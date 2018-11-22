@@ -9,19 +9,19 @@ package flexbox;
  *
  * @author Albert
  */
-public class Type4 extends Type3
+public class Type345 extends Box
 {
 
-    public Type4(double height, double width, double depth, int grade, boolean sealableTop, int quantity)
+    public Type345(double height, double width, double depth, int grade, boolean sealableTop, int quantity)
     {
         super(height, width, depth, grade, sealableTop, quantity);
     }
-    
+       
     @Override
     public double box_price()
     {
         super.box_price();
-        super.price += super.base_price() * 0.13;
+        super.price += super.base_price() * 0.03;
         return super.price;
     }
 }

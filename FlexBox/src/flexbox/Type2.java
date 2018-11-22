@@ -9,7 +9,7 @@ package flexbox;
  *
  * @author Albert
  */
-public class Type2 extends Type1
+public class Type2 extends Box
 {
 
     public Type2(double height, double width, double depth, int grade, boolean sealableTop, int quantity)
