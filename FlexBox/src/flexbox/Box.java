@@ -13,10 +13,12 @@ public class Box
 {
     int grade, quantity;
     double depth, height, width, base, modifier;
-    boolean sealableTop;
+    boolean sealableTop, canSupply;
     double[] gradePrice = {0.55, 0.65, 0.82, 0.98, 1.5};
-    
-    //Type 1
+    String errorMessage = "";
+    //Default Constructor
+    public Box(){}
+    //Type 1 Constructor
     public Box(double height, double width, double depth, int grade, boolean sealableTop, int quantity)
     {
         this.depth = depth;
@@ -25,9 +27,10 @@ public class Box
         this.grade = grade;
         this.sealableTop = sealableTop;
         this.quantity = quantity;
+        modifier = 0;
     }
     
-    //Type 2
+    //Type 2 Constructor
     public Box(double height, double width, double depth, int grade, int colour, boolean sealableTop, int quantity)
     {
         this.depth = depth;
@@ -36,9 +39,10 @@ public class Box
         this.grade = grade;
         this.sealableTop = sealableTop;
         this.quantity = quantity;
+        modifier = 0;
     }
     
-    //Type 3, 4 and 5
+    //Type 3, 4 and 5 Constructor
     public Box(double height, double width, double depth, int grade, int colour, boolean reinforcedBottom, boolean reinforcedCorner, boolean sealableTop, int quantity)
     {
         this.depth = depth;
@@ -47,10 +51,13 @@ public class Box
         this.grade = grade;
         this.sealableTop = sealableTop;
         this.quantity = quantity;
+        modifier = 0;
+        
     }
     
     public double area()
     {
+        //      Sides               Sides             Top and Bottom (Flaps overlap)
         return (2*(height*width) + 2*(height*depth) + 4*(width*depth));
     }
     
@@ -61,7 +68,7 @@ public class Box
     
     public double box_price()
     {
-        return (getQuantity() * area() * (base_price(grade) * modifier));
+        return (getQuantity() * (area() * (base + (base * modifier))));
     }
     
     public int getQuantity()

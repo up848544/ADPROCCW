@@ -12,17 +12,32 @@ package flexbox;
 public class Type2 extends Box
 {
 
-    public Type2(double height, double width, double depth, int grade, boolean sealableTop, int quantity)
+    public Type2(double height, double width, double depth, int grade, int colour, boolean sealableTop, int quantity)
     {
-        super(height, width, depth, grade, sealableTop, quantity);
+        super(height, width, depth, grade, colour, sealableTop, quantity);
+        super.modifier += 0.12;
+        super.hasSealableTop(sealableTop);
+        base_price(grade);
     }
     
-    @Override
-    public double box_price()
+   @Override
+    public double base_price(int g)
     {
-        super.box_price();
-        super.price += super.base_price() * 0.12;
-        return super.price;
+        switch (g){
+            case 2:
+                super.base = 0.65;
+                break;
+            case 3:
+                super.base = 0.82;
+                break;
+            case 4:
+                super.base = 0.98;
+                break;
+            default:
+                super.errorMessage += "Incorrect Grade ";
+                break;
+        }
+        return super.base;
     }
     
         
