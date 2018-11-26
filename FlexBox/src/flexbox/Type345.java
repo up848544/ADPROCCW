@@ -34,27 +34,5 @@ public class Type345 extends Box
         return reinforcedCorner;
     }
     
-    @Override
-    public double base_price(int g)
-    {
-        switch (g){
-            case 2:
-                if(this.reinforcedCorner) super.errorMessage += "Incorrect Grade Cannot Have Reinforced Corners ";
-                else super.base = 0.65;
-                break;
-            case 3:
-                super.base = 0.82;
-                break;
-            case 4:
-                super.base = 0.98;
-                break;
-            case 5 :
-                super.base = 1.5;
-                break;
-            default:
-                super.errorMessage += "Incorrect Grade ";
-                break;
-        }
-        return super.base;
-    }
+    
 }

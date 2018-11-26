@@ -20,25 +20,7 @@ public class Type2 extends Box
         base_price(grade);
     }
     
-   @Override
-    public double base_price(int g)
-    {
-        switch (g){
-            case 2:
-                super.base = 0.65;
-                break;
-            case 3:
-                super.base = 0.82;
-                break;
-            case 4:
-                super.base = 0.98;
-                break;
-            default:
-                super.errorMessage += "Incorrect Grade ";
-                break;
-        }
-        return super.base;
-    }
+   
     
         
     

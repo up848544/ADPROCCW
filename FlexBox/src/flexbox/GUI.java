@@ -36,7 +36,7 @@ public class GUI extends javax.swing.JFrame
         gradeButtonGroup = new javax.swing.ButtonGroup();
         colourButtonGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        output = new javax.swing.JTextArea();
         inputPanel = new javax.swing.JPanel();
         sizePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -63,6 +63,7 @@ public class GUI extends javax.swing.JFrame
         clearButton = new javax.swing.JButton();
         addToOrderButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
+        price = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FlexBox Order");
@@ -72,9 +73,12 @@ public class GUI extends javax.swing.JFrame
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        output.setColumns(20);
+        output.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        output.setLineWrap(true);
+        output.setRows(5);
+        output.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(output);
 
         inputPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -304,6 +308,13 @@ public class GUI extends javax.swing.JFrame
         controlsPanel.setLayout(new java.awt.GridLayout(2, 0));
 
         clearButton.setText("Clear Order");
+        clearButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                clearButtonMouseClicked(evt);
+            }
+        });
         controlsPanel.add(clearButton);
 
         addToOrderButton.setText("Add To Order");
@@ -325,17 +336,23 @@ public class GUI extends javax.swing.JFrame
         errorLabel.setText(" ");
         errorLabel.setOpaque(true);
 
+        price.setText("Total Price: £0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(price)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -346,8 +363,10 @@ public class GUI extends javax.swing.JFrame
                     .addComponent(inputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(errorLabel)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorLabel)
+                    .addComponent(price))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,9 +375,25 @@ public class GUI extends javax.swing.JFrame
     private void addToOrderButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_addToOrderButtonMouseClicked
     {//GEN-HEADEREND:event_addToOrderButtonMouseClicked
         // TODO add your handling code here:
-        if (order.canSupply(depth, width, depth, grade, colour, sealableTop, sealableTop, sealableTop, WIDTH))
+        if (order.canSupply(depth, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity))
         {
             order.addBox(height, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity);
+            text += "\n Width: " + width + "m, Height: " + height + "m, Depth: " + depth + "m, Grade: " + grade + ", Colours: " + colour;
+            if (sealableTop)
+            {
+                text += ", Sealable Top ";
+            }
+            if (reinforcedCorner)
+            {
+                text += ", Reinforced Corners ";
+            }
+            if (reinforcedBottom)
+            {
+                text += ", Reinforced Bottom ";
+            }
+            text += ", Quantity: " + quantity;
+            output.setText(text);
+            price.setText("Total Price: £" + order.totalPrice());
         }
     }//GEN-LAST:event_addToOrderButtonMouseClicked
 
@@ -386,7 +421,7 @@ public class GUI extends javax.swing.JFrame
     private void quantityInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_quantityInputStateChanged
     {//GEN-HEADEREND:event_quantityInputStateChanged
         // TODO add your handling code here:
-        quantity = (int) widthInput.getValue();
+        quantity = (int) quantityInput.getValue();
         check();
     }//GEN-LAST:event_quantityInputStateChanged
 
@@ -490,6 +525,34 @@ public class GUI extends javax.swing.JFrame
         sealableTop = sealableTopInput.isSelected();
         check();
     }//GEN-LAST:event_sealableTopInputStateChanged
+
+    private void clearButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_clearButtonMouseClicked
+    {//GEN-HEADEREND:event_clearButtonMouseClicked
+        // TODO add your handling code here:
+        order = new Order();
+        grade = 1;
+        grade1RadioButton.setSelected(true);
+        colour = 0;
+        colourNoneRadioButton.setSelected(true);
+        quantity = 1;
+        quantityInput.setValue(1);
+        depth = 0.1;
+        depthInput.setValue(0.1);
+        height = 0.1;
+        heightInput.setValue(0.1);
+        width = 0.1;
+        widthInput.setValue(0.1);
+        sealableTop = false;
+        sealableTopInput.setSelected(false);
+        reinforcedCorner = false;
+        reinforcedCornerInput.setSelected(false);
+        reinforcedBottom = false;
+        reinforcedBottomInput.setSelected(false);
+        text = " ";
+        output.setText(text);
+        price.setText("Total Price: £0");
+           
+    }//GEN-LAST:event_clearButtonMouseClicked
     public void check()
     {
         if (order.canSupply(depth, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity))
@@ -502,10 +565,12 @@ public class GUI extends javax.swing.JFrame
             errorLabel.setBackground(Color.red);
         }
     }
-    public static Order order = new Order();
+
+    public static Order order;
     static int grade, colour, quantity;
     static double depth, height, width;
     static boolean sealableTop, reinforcedCorner, reinforcedBottom;
+    public static String text = "";
 
     /**
      * @param args the command line arguments
@@ -548,7 +613,7 @@ public class GUI extends javax.swing.JFrame
             public void run()
             {
                 new GUI().setVisible(true);
-                
+                order = new Order();
                 grade = 1;
                 colour = 0;
                 quantity = 1;
@@ -585,8 +650,9 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel otherPanel;
+    private javax.swing.JTextArea output;
+    private javax.swing.JLabel price;
     private javax.swing.JSpinner quantityInput;
     private javax.swing.JToggleButton reinforcedBottomInput;
     private javax.swing.JToggleButton reinforcedCornerInput;
