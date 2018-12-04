@@ -82,7 +82,7 @@ public class GUI extends javax.swing.JFrame
 
         inputPanel.setLayout(new java.awt.GridBagLayout());
 
-        sizePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Size (in metres)"));
+        sizePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Size (in metres, 0.1 - 5)"));
         sizePanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Width  Height  Depth");
@@ -131,10 +131,11 @@ public class GUI extends javax.swing.JFrame
         gridBagConstraints.gridy = 1;
         sizePanel.add(depthInput, gridBagConstraints);
 
-        jLabel2.setText("Quantity");
+        jLabel2.setText("Quantity Max: 100");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         sizePanel.add(jLabel2, gridBagConstraints);
 
         quantityInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
@@ -158,7 +159,7 @@ public class GUI extends javax.swing.JFrame
         gradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Grade"));
         gradePanel.setToolTipText("");
         gradePanel.setName(""); // NOI18N
-        gradePanel.setLayout(new java.awt.GridLayout());
+        gradePanel.setLayout(new java.awt.GridLayout(1, 0));
 
         gradeButtonGroup.add(grade1RadioButton);
         grade1RadioButton.setSelected(true);
@@ -223,7 +224,7 @@ public class GUI extends javax.swing.JFrame
         inputPanel.add(gradePanel, gridBagConstraints);
 
         colourPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Colour"));
-        colourPanel.setLayout(new java.awt.GridLayout());
+        colourPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         colourButtonGroup.add(colourNoneRadioButton);
         colourNoneRadioButton.setSelected(true);

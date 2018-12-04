@@ -68,7 +68,7 @@ public class Box
     
     public double box_price()
     {
-        return (getQuantity() * (area() * (base + (base * modifier))));
+        return (Math.floor((getQuantity() * (area() * (base + (base * modifier))))*100))/100;
     }
     
     public int getQuantity()
