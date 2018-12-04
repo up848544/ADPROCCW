@@ -19,6 +19,18 @@ public class Type1 extends Box
         base_price(grade);
     }        
     
+    @Override
+    public String printBox()
+    {
+        String text = "";
+        text += "\n Width: " + width + "m, Height: " + height + "m, Depth: " + depth + "m, Grade: " + grade + ", Colours: 0";
+            if (sealableTop)
+            {
+                text += ", Sealable Top ";
+            }
+            text += ", Quantity: " + quantity;
+        return text;
+    }
     
     
         

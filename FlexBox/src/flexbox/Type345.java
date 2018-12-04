@@ -35,4 +35,26 @@ public class Type345 extends Box
     }
     
     
+    @Override
+    public String printBox()
+    {
+        String text = "";
+        text += "\n Width: " + width + "m, Height: " + height + "m, Depth: " + depth + "m, Grade: " + grade + ", Colours: 2";
+            if (sealableTop)
+            {
+                text += ", Sealable Top ";
+            }
+            if (reinforcedCorner)
+            {
+                text += ", Reinforced Corners ";
+            }
+            if (reinforcedBottom)
+            {
+                text += ", Reinforced Bottom ";
+            }
+            text += ", Quantity: " + quantity;
+        return text;
+    }
+    
+    
 }

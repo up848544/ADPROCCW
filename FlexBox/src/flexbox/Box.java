@@ -81,4 +81,9 @@ public class Box
         if(top)modifier+=0.1;
     }
     
+   public String printBox()
+   {
+       return "";
+   }
+    
 }

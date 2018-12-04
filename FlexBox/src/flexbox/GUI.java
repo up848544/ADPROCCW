@@ -6,6 +6,7 @@
 package flexbox;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -378,23 +379,11 @@ public class GUI extends javax.swing.JFrame
         // TODO add your handling code here:
         if (order.canSupply(depth, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity))
         {
-            order.addBox(height, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity);
-            text += "\n Width: " + width + "m, Height: " + height + "m, Depth: " + depth + "m, Grade: " + grade + ", Colours: " + colour;
-            if (sealableTop)
-            {
-                text += ", Sealable Top ";
-            }
-            if (reinforcedCorner)
-            {
-                text += ", Reinforced Corners ";
-            }
-            if (reinforcedBottom)
-            {
-                text += ", Reinforced Bottom ";
-            }
-            text += ", Quantity: " + quantity;
+            Box b = order.addBox(height, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity);
+            text += b.printBox();
             output.setText(text);
-            price.setText("Total Price: £" + order.totalPrice());
+            DecimalFormat df = new DecimalFormat("0.00");
+            price.setText("Total Price: £" + df.format(order.totalPrice()).replaceAll("\\.00$",""));
         }
     }//GEN-LAST:event_addToOrderButtonMouseClicked
 
