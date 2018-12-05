@@ -5,13 +5,9 @@
  */
 package flexbox;
 
-import java.awt.Color;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Albert
- */
 public class GUI extends javax.swing.JFrame
 {
 
@@ -383,36 +379,60 @@ public class GUI extends javax.swing.JFrame
             text += b.printBox();
             output.setText(text);
             DecimalFormat df = new DecimalFormat("0.00");
-            price.setText("Total Price: £" + df.format(order.totalPrice()).replaceAll("\\.00$",""));
+            price.setText("Total Price: £" + df.format(order.totalPrice()).replaceAll("\\.00$", ""));
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Cannot create box of current configuration", "Error: Box Unavailable", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_addToOrderButtonMouseClicked
 
     private void widthInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_widthInputStateChanged
     {//GEN-HEADEREND:event_widthInputStateChanged
         // TODO add your handling code here:
-        width = (double) widthInput.getValue();
-        check();
+        try{
+            width = (double) widthInput.getValue();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_widthInputStateChanged
 
     private void heightInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_heightInputStateChanged
     {//GEN-HEADEREND:event_heightInputStateChanged
         // TODO add your handling code here:
+        try{
         height = (double) heightInput.getValue();
-        check();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_heightInputStateChanged
 
     private void depthInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_depthInputStateChanged
     {//GEN-HEADEREND:event_depthInputStateChanged
         // TODO add your handling code here:
+        try{
         depth = (double) depthInput.getValue();
-        check();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_depthInputStateChanged
 
     private void quantityInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_quantityInputStateChanged
     {//GEN-HEADEREND:event_quantityInputStateChanged
         // TODO add your handling code here:
+        try{
         quantity = (int) quantityInput.getValue();
-        check();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Please Input a number between 1 and 100", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_quantityInputStateChanged
 
     private void grade1RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_grade1RadioButtonStateChanged
@@ -422,7 +442,6 @@ public class GUI extends javax.swing.JFrame
         {
             grade = 1;
         }
-        check();
     }//GEN-LAST:event_grade1RadioButtonStateChanged
 
     private void grade2RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_grade2RadioButtonStateChanged
@@ -432,7 +451,6 @@ public class GUI extends javax.swing.JFrame
         {
             grade = 2;
         }
-        check();
     }//GEN-LAST:event_grade2RadioButtonStateChanged
 
     private void grade3RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_grade3RadioButtonStateChanged
@@ -442,7 +460,6 @@ public class GUI extends javax.swing.JFrame
         {
             grade = 3;
         }
-        check();
     }//GEN-LAST:event_grade3RadioButtonStateChanged
 
     private void grade4RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_grade4RadioButtonStateChanged
@@ -452,7 +469,6 @@ public class GUI extends javax.swing.JFrame
         {
             grade = 4;
         }
-        check();
     }//GEN-LAST:event_grade4RadioButtonStateChanged
 
     private void grade5RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_grade5RadioButtonStateChanged
@@ -462,7 +478,6 @@ public class GUI extends javax.swing.JFrame
         {
             grade = 5;
         }
-        check();
     }//GEN-LAST:event_grade5RadioButtonStateChanged
 
     private void colourNoneRadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_colourNoneRadioButtonStateChanged
@@ -472,7 +487,6 @@ public class GUI extends javax.swing.JFrame
         {
             colour = 0;
         }
-        check();
     }//GEN-LAST:event_colourNoneRadioButtonStateChanged
 
     private void colour1RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_colour1RadioButtonStateChanged
@@ -482,7 +496,6 @@ public class GUI extends javax.swing.JFrame
         {
             colour = 1;
         }
-        check();
     }//GEN-LAST:event_colour1RadioButtonStateChanged
 
     private void colour2RadioButtonStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_colour2RadioButtonStateChanged
@@ -492,28 +505,24 @@ public class GUI extends javax.swing.JFrame
         {
             colour = 2;
         }
-        check();
     }//GEN-LAST:event_colour2RadioButtonStateChanged
 
     private void reinforcedBottomInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_reinforcedBottomInputStateChanged
     {//GEN-HEADEREND:event_reinforcedBottomInputStateChanged
         // TODO add your handling code here:
         reinforcedBottom = reinforcedBottomInput.isSelected();
-        check();
     }//GEN-LAST:event_reinforcedBottomInputStateChanged
 
     private void reinforcedCornerInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_reinforcedCornerInputStateChanged
     {//GEN-HEADEREND:event_reinforcedCornerInputStateChanged
         // TODO add your handling code here:
         reinforcedCorner = reinforcedCornerInput.isSelected();
-        check();
     }//GEN-LAST:event_reinforcedCornerInputStateChanged
 
     private void sealableTopInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_sealableTopInputStateChanged
     {//GEN-HEADEREND:event_sealableTopInputStateChanged
         // TODO add your handling code here:
         sealableTop = sealableTopInput.isSelected();
-        check();
     }//GEN-LAST:event_sealableTopInputStateChanged
 
     private void clearButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_clearButtonMouseClicked
@@ -541,20 +550,8 @@ public class GUI extends javax.swing.JFrame
         text = " ";
         output.setText(text);
         price.setText("Total Price: £0");
-           
+
     }//GEN-LAST:event_clearButtonMouseClicked
-    public void check()
-    {
-        if (order.canSupply(depth, width, depth, grade, colour, sealableTop, reinforcedBottom, reinforcedCorner, quantity))
-        {
-            errorLabel.setVisible(false);
-        } else
-        {
-            errorLabel.setVisible(true);
-            errorLabel.setText("ERROR BOX CANNOT BE SUPPLIED");
-            errorLabel.setBackground(Color.red);
-        }
-    }
 
     public static Order order;
     static int grade, colour, quantity;

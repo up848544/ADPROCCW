@@ -7,10 +7,7 @@ package flexbox;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Albert
- */
+
 public class Order
 {
 
@@ -22,65 +19,96 @@ public class Order
         0, 0, 0, 0, 0, 0, 0, 0, 0
     };
 
+    /**
+     *
+     */
     public Order()
     {
         this.boxes_Ordered = new ArrayList<>();
     }
 
+    /**
+     * Checks whether the box can be supplied.
+     * @param h
+     * @param w
+     * @param d
+     * @param g
+     * @param col
+     * @param t
+     * @param b
+     * @param c
+     * @param q
+     * @return boolean true if box can be supplied false otherwise.
+     */
     public boolean canSupply(double h, double w, double d, int g, int col, boolean t, boolean b, boolean c, int q)
     {
         if (g <= 3 && col == 0 && !b && !c)
         {
             return true;
-        }
-        else if (g >= 2 && g <= 4 && col == 1 && !b && !c)
+        } else if (g >= 2 && g <= 4 && col == 1 && !b && !c)
         {
             return true;
-        }
-        else if (g >= 2 && col == 2 && !b && !c)
+        } else if (g >= 2 && col == 2 && !b && !c)
         {
             return true;
-        }
-        else if (g >= 2 && col == 2 && b && !c)
+        } else if (g >= 2 && col == 2 && b && !c)
         {
             return true;
-        }
-        else if (g >= 3 && col == 2 && b && c)
+        } else if (g >= 3 && col == 2 && b && c)
         {
             return true;
+        } else
+        {
+            return false;
         }
-        else{return false;}
     }
 
+    /**
+     * adds the created box to the order.
+     * @param h
+     * @param w
+     * @param d
+     * @param g
+     * @param col
+     * @param t
+     * @param b
+     * @param c
+     * @param q
+     * @return the newly created box.
+     */
     public Box addBox(double h, double w, double d, int g, int col, boolean t, boolean b, boolean c, int q)
     {
         if (g <= 3 && col == 0 && !b && !c)
         {
-            boxes_Ordered.add(new Type1(h,w,d,g,t,q)); 
+            boxes_Ordered.add(new Type1(h, w, d, g, t, q));
         }
         if (g >= 2 && g <= 4 && col == 1 && !b && !c)
         {
-            boxes_Ordered.add(new Type2(h,w,d,g,col,t,q));
+            boxes_Ordered.add(new Type2(h, w, d, g, col, t, q));
         }
         if (g >= 2 && col == 2 && !b & !c)
         {
-            boxes_Ordered.add(new Type345(h,w,d,g,col,t,b,c,q));
+            boxes_Ordered.add(new Type345(h, w, d, g, col, t, b, c, q));
         }
         if (g >= 2 && col == 2 && b && !c)
         {
-            boxes_Ordered.add(new Type345(h,w,d,g,col,t,b,c,q));
+            boxes_Ordered.add(new Type345(h, w, d, g, col, t, b, c, q));
         }
         if (g >= 3 && col == 2 & b & c)
         {
-            boxes_Ordered.add(new Type345(h,w,d,g,col,t,b,c,q));
+            boxes_Ordered.add(new Type345(h, w, d, g, col, t, b, c, q));
         }
-        return boxes_Ordered.get(boxes_Ordered.size()-1);
+        return boxes_Ordered.get(boxes_Ordered.size() - 1);
     }
-    
+
+    /**
+     * Returns the total price of the order
+     * @return double the total price of the order.
+     */
     public double totalPrice()
     {
         this.totalPrice = 0;
-        for(Box b : boxes_Ordered)
+        for (Box b : boxes_Ordered)
         {
             totalPrice += b.box_price();
         }
