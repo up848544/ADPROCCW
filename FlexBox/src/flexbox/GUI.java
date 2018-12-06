@@ -6,7 +6,9 @@
 package flexbox;
 
 import java.text.DecimalFormat;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 
 public class GUI extends javax.swing.JFrame
 {
@@ -69,6 +71,13 @@ public class GUI extends javax.swing.JFrame
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentShown(java.awt.event.ComponentEvent evt)
+            {
+                formComponentShown(evt);
+            }
+        });
 
         output.setColumns(20);
         output.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -135,7 +144,7 @@ public class GUI extends javax.swing.JFrame
         gridBagConstraints.gridwidth = 2;
         sizePanel.add(jLabel2, gridBagConstraints);
 
-        quantityInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        quantityInput.setModel(new javax.swing.SpinnerNumberModel(0.1d, 0.1d, 5.0d, 0.01d));
         quantityInput.addChangeListener(new javax.swing.event.ChangeListener()
         {
             public void stateChanged(javax.swing.event.ChangeEvent evt)
@@ -389,10 +398,10 @@ public class GUI extends javax.swing.JFrame
     private void widthInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_widthInputStateChanged
     {//GEN-HEADEREND:event_widthInputStateChanged
         // TODO add your handling code here:
-        try{
+        try
+        {
             width = (double) widthInput.getValue();
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -401,10 +410,10 @@ public class GUI extends javax.swing.JFrame
     private void heightInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_heightInputStateChanged
     {//GEN-HEADEREND:event_heightInputStateChanged
         // TODO add your handling code here:
-        try{
-        height = (double) heightInput.getValue();
-        }
-        catch(Exception e)
+        try
+        {
+            height = (double) heightInput.getValue();
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -413,10 +422,10 @@ public class GUI extends javax.swing.JFrame
     private void depthInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_depthInputStateChanged
     {//GEN-HEADEREND:event_depthInputStateChanged
         // TODO add your handling code here:
-        try{
-        depth = (double) depthInput.getValue();
-        }
-        catch(Exception e)
+        try
+        {
+            depth = (double) depthInput.getValue();
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Please Input a number between 0.1 and 5", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -425,10 +434,10 @@ public class GUI extends javax.swing.JFrame
     private void quantityInputStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_quantityInputStateChanged
     {//GEN-HEADEREND:event_quantityInputStateChanged
         // TODO add your handling code here:
-        try{
-        quantity = (int) quantityInput.getValue();
-        }
-        catch(Exception e)
+        try
+        {
+            quantity = (int) quantityInput.getValue();
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Please Input a number between 1 and 100", "Error: Incorrect Input", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -553,6 +562,20 @@ public class GUI extends javax.swing.JFrame
 
     }//GEN-LAST:event_clearButtonMouseClicked
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentShown
+    {//GEN-HEADEREND:event_formComponentShown
+        // TODO add your handling code here:
+        disableInput();
+    }//GEN-LAST:event_formComponentShown
+
+    public void disableInput()
+    {
+        ((JSpinner.DefaultEditor) widthInput.getEditor()).getTextField().setEditable(false);
+        ((JSpinner.DefaultEditor) depthInput.getEditor()).getTextField().setEditable(false);
+        ((JSpinner.DefaultEditor) heightInput.getEditor()).getTextField().setEditable(false);
+        ((JSpinner.DefaultEditor) quantityInput.getEditor()).getTextField().setEditable(false);
+        
+    }
     public static Order order;
     static int grade, colour, quantity;
     static double depth, height, width;
@@ -610,6 +633,9 @@ public class GUI extends javax.swing.JFrame
                 sealableTop = false;
                 reinforcedCorner = false;
                 reinforcedBottom = false;
+                
+                
+                
             }
         });
     }
