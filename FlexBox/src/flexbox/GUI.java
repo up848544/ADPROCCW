@@ -144,7 +144,7 @@ public class GUI extends javax.swing.JFrame
         gridBagConstraints.gridwidth = 2;
         sizePanel.add(jLabel2, gridBagConstraints);
 
-        quantityInput.setModel(new javax.swing.SpinnerNumberModel(0.1d, 0.1d, 5.0d, 0.01d));
+        quantityInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
         quantityInput.addChangeListener(new javax.swing.event.ChangeListener()
         {
             public void stateChanged(javax.swing.event.ChangeEvent evt)
